@@ -6,7 +6,7 @@ $a_{1}x_{1} + a_{2}x_{2}+...+a_{n}x_{n}=b$
 > $b$ 와 coefficient "$a_{1}...a_{n}$"는 real 또는 complex number 이다.
 
 > *Warning*  
-> $4x_{1} - 5x_{2} = x_{1}x_{2}$ 는 linear하지 않다.
+> $$4x_{1} - 5x_{2} = x_{1}x_{2}$$ 는 linear하지 않다.
 > 
 ### 1.1.2 system of linear equations(or linear system)이란  
 * 하나 또는 하나 이상의 linear equation의 모음.
