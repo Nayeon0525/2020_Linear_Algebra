@@ -1,0 +1,438 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Chapter 01. Linear Equations in Linear Algebra\n",
+    "--------------------------------------------------\n",
+    "## 1.1 Systems of Linear Equations\n",
+    "### 1.1.1 linear equation이란\n",
+    "$a_{1}x_{1} + a_{2}x_{2}+...+a_{n}x_{n}=b$\n",
+    "> $b$ 와 coefficient \"$a_{1}...a_{n}$\"는 real 또는 complex number 이다.\n",
+    "\n",
+    "> *Warning*  \n",
+    "> $4x_{1} - 5x_{2} = x_{1}x_{2}$ 는 linear하지 않다.\n",
+    "> \n",
+    "### 1.1.2 system of linear equations(or linear system)이란  \n",
+    "* 하나 또는 하나 이상의 linear equation의 모음.\n",
+    "    * EX) $2x_{1} - x_{2} + 1.5x_{3} =  8$  \n",
+    "        $x_{1} - 5x_{2} + 2x_{3} =  -7$  \n",
+    "        \n",
+    "### 1.1.3 solution of linear system  \n",
+    "> 1. no solution\n",
+    "> 2. exactly one solution\n",
+    "> 3. infinitely many solutions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1.1.4 Matrix Notation\n",
+    "* ####  linear system\n",
+    "> $x_{1} -2x_{2} +  x_{3} = 0$  \n",
+    "> $       2x_{2} - 8x_{3} = 8$  \n",
+    "> $5x_{1} -5x_{3} = 10$\n",
+    "\n",
+    "* #### coefiicient matrix(or matrix of coefficients)   \n",
+    "> $\\begin{bmatrix} 1 & -2 & 1 \\\\ 0 & 2 & -8 \\\\ 5 & 0 & -5 \\end{bmatrix}$\n",
+    "\n",
+    "* #### augmented matrix   \n",
+    "> $\\begin{bmatrix} 1 & -2 & 1 & 0 \\\\ 0 & 2 & -8 & 8\\\\ 5 & 0 & -5 & 10\\end{bmatrix}$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1.1.5 Solving a Linear System\n",
+    "> **Elementary Row Operations**\n",
+    "> 1. Replacement\n",
+    "> 2. Interchange\n",
+    "> 3. Scaling"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1.1.6 Existence and Uniqueness Questions\n",
+    "> **linear system에 대한 두가지 질문**\n",
+    "> 1. Is the system **consistent** : that is, does at least one solution *exist*? (one solution or infinitely many solution)\n",
+    "> 2. If a solution **exists**, is the *only one* : that is , is the solution *unique*?\n",
+    "![solutionset](./solutionset.png)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "----------------------------\n",
+    "## 1.2 Row Reduction and Echelon Form\n",
+    "\n",
+    "### *Definition* : echelon form\n",
+    "> a rectangular matrix가 **echelon form(또는 row echelon form)** 이면 아래와 같은 특성을 따른다.  \n",
+    "> 1. 모든 nonzero row는 zero 행 위에 있다.\n",
+    "> 2. 각 행의 leading entry는 그 위의 leading entry에 비해 오른쪽에 위치한다.\n",
+    "> 3. leading entry 밑에 있는 columndm은 모두 zero이다.\n",
+    "> **reduced echelon form (or reduced row echelon form, RREF)** 일 때는\n",
+    "> 4. leading entry 가 1이다. (; leading 1)  \n",
+    "> 5. leading 1을 포함하는 각 열은 leading 1의 위아래가 0이어야 한다.\n",
+    "* row-reduced란 elementary row operations에 의해 변환된 것"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 1* : Uniqueness of the Reduced Echelon Form\n",
+    "> reduced chelon matrix는 유일무이하다. (row equivalent)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Definition* : pivot position\n",
+    "> reduced echelon form matrix에서 leading 1과 상응하는 위치, pivot position을 포함하는 column을 pivot coloum이라고 한다."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 2* : Existence and Uniqueness Theorem \n",
+    "> linear system이 consitent하다면,   \n",
+    "> (i) **unique solution** (no free variable)  \n",
+    "> (ii) **infinitely many solutions** (at least one free variable)\n",
+    "\n",
+    "**EX)**  \n",
+    "* linear system  \n",
+    "$3x_{2} - 6x_{3} + 6x_{4} + 4x_{5} = -5$  \n",
+    "$3x_{1} - 7x_{2} - 8x_{3} - 5x_{4} + 8x_{5} = 9$  \n",
+    "$3x_{1} - 9x_{2} + 12x_{3} - 9x_{4} + 6x_{5} = 15$\n",
+    "\n",
+    "* augmented matrix  \n",
+    "$\\begin{bmatrix} 0 & 3 & -6 & 6 & 4 & -5 \\\\ 3 & -7 & -8 & -5 & 8 & 9 \\\\ 3 & -9 & 12 & -9 & 6 & 15\\end{bmatrix}$ **~** $\\begin{bmatrix} 3 & -9 & 12 & -9 & 6 & 15 \\\\ 0 & 2 & -4 & 4 & 2 & -6 \\\\ 0 & 0 & 0 & 0 & 1 & 4 \\end{bmatrix}$\n",
+    "\n",
+    "> basic variables : $x_{1}, x_{2}, x_{5}$  \n",
+    "> free variables :  $x_{3}, x_{4}$  \n",
+    "> 따라서 이 solution은 free variable이 어떤 값을 가지냐에 따라 달라지므로 *unique하지 않다.*"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-----------------------------\n",
+    "## 1.3 Vector Equations\n",
+    "### 1.3.1 Vectors in $\\mathbb{R}^n$\n",
+    "* n x 1 column matrices with n entries.\n",
+    "* represented geometrically by points in a n-dimensional coordinate space\n",
+    "* Two vectors in $\\mathbb{R}^n$ are equal if and only if their corresponding etries are equal (because vectors are ordered pairs of real numbers.)\n",
+    "\n",
+    "> **EX)**  \n",
+    "> vector **u**, **v** in $\\mathbb{R}^2$ (즉, n=2)\n",
+    "> vectos with two entries  \n",
+    "> **u** = $\\begin{bmatrix} 3 \\\\ -1 \\end{bmatrix}$, **v** = $\\begin{bmatrix} .2 \\\\ .3 \\end{bmatrix}$\n",
+    "\n",
+    "> #### Algebraic Properties of $\\mathbb{R}^n$\n",
+    "> for all **u, v, w** in $\\mathbb{R}^n$ and all scalars *c* and *d*:\n",
+    "> 1. **u** + **v** = **v** + **u** \n",
+    "> 2. (**u** + **v**) + **w** = **u** + (**v** + **w**)\n",
+    "> 3. **u** + **0** = **0** + **u** = **u** \n",
+    "> 4. **u** + (-**u**) = (-**u**) + **u** = **0**, where -**u** denotes (-1)**u** \n",
+    "> 5. *c*(**u** + **v**) = *c* **u** + *c* **v** \n",
+    "> 6. (*c* + *d*)**u** = *c* **u** + *d* **u** \n",
+    "> 7. *c*(*d* **u**) = (*cd*)**u** \n",
+    "> 8. 1**u** = **u** "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Definition* : linear combinations\n",
+    "> if $\\mathbf{v_{1}}, \\dots, \\mathbf{v_{n}}$ are in $\\mathbb{R}^n$,  \n",
+    "the set of all linear combinations of $\\mathbf{v_{1}}, \\dots, \\mathbf{v_{n}}$은 Span{$\\mathbf{v_{1}}, \\dots, \\mathbf{v_{n}}$}과 동일하다.\n",
+    "> 즉, Span{$\\mathbf{v_{1}}, \\dots, \\mathbf{v_{n}}$}은 벡터들의 모임이며 $c_{1}\\mathbf{v_{1}} + \\dots + c_{p}\\mathbf{v_{p}}$ (c는 스칼라)로 표현가능하다.\n",
+    "\n",
+    "> **같은 표현**\n",
+    "> * vector equation  \n",
+    "> $x_{1}\\mathbf{a_{1}} + x_{2}\\mathbf{a_{2}} + \\dots + x_{n}\\mathbf{a_{n}} = \\mathbf{b}$  \n",
+    "> * augmented matrix  \n",
+    "$\\begin{bmatrix} \\mathbf{a_{1}} & \\mathbf{a_{2}} & \\dots & \\mathbf{a_{n}} & \\mathbf{b} \\end{bmatrix}$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1.3.2 A Geometric Description of Span{$\\mathbf{v}$} and Span{$\\mathbf{u, v}$}\n",
+    "어떤 벡터가 Span한다는 것은 벡터들의 가능한 모든 linear combination으로 공간을 형성하는 것을 의미, 형성되는 공간은 조합되는 벡터에 따라 $\\mathbb{R}^n$, 또는 subspace가 될 수도 있다."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-----------------------------\n",
+    "## 1.4 The Matrix Equation $A\\mathbf{x} = \\mathbf{b}$\n",
+    "### *Definition* : $A\\mathbf{x}$\n",
+    "> $A\\mathbf{x} =$ $\\begin{bmatrix} \\mathbf{a_{1}} & \\mathbf{a_{2}} & \\dots & \\mathbf{a_{n}} \\end{bmatrix}$ $\\begin{bmatrix} x_{1} \\\\ \\dots \\\\ x_{n} \\end{bmatrix}$ $= x_{1}\\mathbf{a_{1}} + \\dots + x_{n}\\mathbf{a_{n}}$\n",
+    "> * $A$ : m x n matrix with columns $\\mathbf{a_{1}}, \\dots, \\mathbf{a_{n}} $\n",
+    "> * $x$ : weights"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 3* \n",
+    "* $A$ : m x n matrix with columns $\\mathbf{a_{1}}, \\dots, \\mathbf{a_{n}} $\n",
+    "* $\\mathbf{b}$ : in $\\mathbb{R}^n$\n",
+    "> * matrix equation\n",
+    "> $A\\mathbf{x} = \\mathbf{b}$\n",
+    "> * vector equation\n",
+    "> $x_{1}\\mathbf{a_{1}} + \\dots + x_{n}\\mathbf{a_{n}}$\n",
+    "> * augmented matrix\n",
+    "> $\\begin{bmatrix} \\mathbf{a_{1}} & \\mathbf{a_{2}} & \\dots & \\mathbf{a_{n}} & \\mathbf{b} \\end{bmatrix}$\n",
+    "\n",
+    "### *Theorem 4* : Existence of Solutions \n",
+    "> 아래 네 문장은 모두 동일한 의미이다.\n",
+    "> 1. $\\mathbb{R}^n$에서 각 $\\mathbf{b}$에 대해, $A\\mathbf{x} = \\mathbf{b}$는 solution을 가지고 있다.\n",
+    "> 2. $\\mathbb{R}^n$에서 각 $\\mathbf{b}$는 $A$의 column들의 linear combination이다.\n",
+    "> 3.  $A$의 column들은  $\\mathbb{R}^n$을 span한다.\n",
+    "> 4. $A$는 모든 row에서 pivot position을 갖는다.\n",
+    "> * *Warning* : coefiicient matrix에서 해당한다.\n",
+    "\n",
+    "### *Theorem 5* : Properies of the Matrix-Vector or Product $A\\mathbf{x}$ \n",
+    "> $A$는 m x n matrix, **u, v** vectors in $\\mathbb{R}^n$, $c$는 scalar\n",
+    "> 1. $A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v}$\n",
+    "> 2. $A(c\\mathbf{u}) = c(A\\mathbf{u})$"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "---------------------------------------\n",
+    "## 1.5 Solution Sets of Linear Systems\n",
+    "### 1.5.1 Homogeneous Linear Systems, $A\\mathbf{x} = \\mathbf{0}$\n",
+    "* $A\\mathbf{x} = \\mathbf{0}$\n",
+    "* 항상 적어도 하나의 solution을 갖는다. $\\mathbf{x}=\\mathbf{0}$\n",
+    "* 위의 zero solution은 trivial solution이다. (;필요없는)\n",
+    "* 적어도 하나 이상의 free variable을 가질 때 non-trivial solution이다. \n",
+    "> EX)  \n",
+    "> $3x_{1} + 5x_{2} - 4x_{3} = 0$  \n",
+    "> $-3x_{1} - 2x_{2} - 8x_{3} = 0$  \n",
+    "> $6x_{1} + x_{2} - 8x_{3} = 0$  \n",
+    "> $\\begin{bmatrix} 3 & 5 & -4 & 0 \\\\ -3 & -2 & -8 & 0 \\\\ 6 & 1 & -8 & 0\\end{bmatrix}$ **~** $\\begin{bmatrix} 3 & 5 & -4 & 0 \\\\ 0 & 3 & 0 & 0 \\\\ 0 & -9 & 0 & 0\\end{bmatrix}$ **~** $\\begin{bmatrix} 3 & 5 & -4 & 0 \\\\ 0 & 3 & 0 & 0 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}$ **~** $\\begin{bmatrix} 1 & 0 & -4/3 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}$  \n",
+    "> * $x_{1} - 4/3x_{3} = 0$\n",
+    "> * $x_{2} = 0$\n",
+    "> * 0 = 0   \n",
+    "> $\\mathbf{x} = \\begin{bmatrix} x_{1} \\\\ x_{2} \\\\ x_{3} \\end{bmatrix} = \\begin{bmatrix} 4/3x_{3} \\\\ 0 \\\\ x_{3} \\end{bmatrix} = x_{3}\\begin{bmatrix} 4/3 \\\\ 0 \\\\ 1 \\end{bmatrix} = x_{3}\\mathbf{v}$, where $\\mathbf{v}=\\begin{bmatrix} 4/3 \\\\ 0 \\\\ 1 \\end{bmatrix}$\n",
+    "> * **따라서 free variable인 $x_{3}$이 nontrivial 하다.**\n",
+    "\n",
+    "### 1.5.2 Parametric Vector Form\n",
+    "$\\mathbf{x} = s\\mathbf{u} + t\\mathbf{v}$\n",
+    "\n",
+    "### 1.5.3 Solutions of Nonhomogeneous Systems, $A\\mathbf{x} = \\mathbf{b}$\n",
+    "> EX)  \n",
+    "> $A = \\begin{bmatrix} 3 & 5 & -4 \\\\ -3 & -2 & 4 \\\\ 6 & 1 & -8\\end{bmatrix}$ and $\\mathbf{b} = \\begin{bmatrix} 7 \\\\ -1 \\\\ -4 \\end{bmatrix}$  \n",
+    "> $\\begin{bmatrix} A & \\mathbf{b} \\end{bmatrix} = \\begin{bmatrix} 3 & 5 & -4 & 7 \\\\ -3 & -2 & 4 & -1 \\\\ 6 & 1 & -8 & -4\\end{bmatrix}$ **~** $\\begin{bmatrix} 1 & 0 & -4/3 & -1 \\\\ 0 & 1 & 0 & 2 \\\\ 0 & 0 & 0 & 0\\end{bmatrix}$  \n",
+    "> * $x_{1} - 4/3x_{3} = -1$\n",
+    "> * $x_{2} = 2$\n",
+    "> * 0 = 0   \n",
+    "> $\\mathbf{x} = \\begin{bmatrix} x_{1} \\\\ x_{2} \\\\ x_{3} \\end{bmatrix} = \\begin{bmatrix} -1 + 4/3x_{3} \\\\ 2 \\\\ x_{3} \\end{bmatrix} = \\begin{bmatrix} -1 \\\\ 2 \\\\ 0 \\end{bmatrix} + \\begin{bmatrix} 4/3x_{3} \\\\ 0 \\\\ x_{3} \\end{bmatrix} = \\begin{bmatrix} -1 \\\\ 2 \\\\ 0 \\end{bmatrix} + x_{3}\\begin{bmatrix} 4/3 \\\\ 0 \\\\ 1 \\end{bmatrix}$   \n",
+    "> ,$\\mathbf{x} = \\mathbf{p} + x_{3}\\mathbf{v}$\n",
+    "\n",
+    "![f3](./figure3.png)\n",
+    "![f5](./figure5.png)\n",
+    "\n",
+    "> #### Parallel solution sets of $A\\mathbf{x} = \\mathbf{b}$ and $A\\mathbf{x} = \\mathbf{0}$  \n",
+    "> 즉, $A\\mathbf{x} = \\mathbf{b}$의 solution은 $A\\mathbf{x} = \\mathbf{0}$의 solution에 $\\mathbf{p}$를 더함으로써 얻을 수 있다.\n",
+    "\n",
+    "\n",
+    "### *Theorem 6* \n",
+    "> Suppose the equation $A\\mathbf{x} = \\mathbf{b}$ is consistent for some given $\\mathbf{b}$, and let $\\mathbf{p}$ be a solution. Then the solution set of  $A\\mathbf{x} = \\mathbf{b}$ is the set of all vectors of the form $\\mathbf{w} = \\mathbf{p} + \\mathbf{v_{h}}$, where $\\mathbf{v_{p}}$ is solution of the homogeneous equation $A\\mathbf{x} = \\mathbf{0}$. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "------------------------------------\n",
+    "## 1.7 Linear Independence\n",
+    "### *Definition* : linearly independece & dependence\n",
+    "> indexed set of vectors ${\\mathbf{v_{1}}, \\dots, \\mathbf{v_{p}}}$ in $\\mathbb{R}^n$ \n",
+    "> 1. linearly independent  \n",
+    "> vector equation $x_{1}\\mathbf{v_{1}} + x_{2}\\mathbf{v_{2}} + \\dots + x_{p}\\mathbf{v_{p}} = \\mathbf{0}$가 오직 **trivial solution**만 갖는다면 ${\\mathbf{v_{1}}, \\dots, \\mathbf{v_{p}}}$는 Linearly independent하다.\n",
+    "> 2. linearly dependent  \n",
+    "> vector equation $c_{1}\\mathbf{v_{1}} + c_{2}\\mathbf{v_{2}} + \\dots + c_{p}\\mathbf{v_{p}} = \\mathbf{0}$에서 weight c가 모두 0이 아니면 ${\\mathbf{v_{1}}, \\dots, \\mathbf{v_{p}}}$는 Linearly dependent하다.  \n",
+    "\n",
+    "> **EX)  set ${\\mathbf{v_{1}, v_{2}, v_{3}}}$이 linearly independent한가?**  \n",
+    "> $\\mathbf{v_{1}} = \\begin{bmatrix} 1 \\\\ 2 \\\\ 3 \\end{bmatrix}$, $\\mathbf{v_{2}} = \\begin{bmatrix} 4 \\\\ 5 \\\\ 6 \\end{bmatrix}$, $\\mathbf{v_{3}} = \\begin{bmatrix} 2 \\\\ 1 \\\\ 0 \\end{bmatrix}$  \n",
+    "> sol)    \n",
+    "> $\\begin{bmatrix} 1&4&2&0 \\\\ 2&5&1&0 \\\\ 3&6&0&0 \\end{bmatrix}$ **~** $\\begin{bmatrix} 1&0&-2&0 \\\\ 0&1&1&0 \\\\ 0&0&0&0 \\end{bmatrix}$  \n",
+    "> * basic variable : $x_{1}, x_{2}$ (= trivial variable)  \n",
+    "> * free variable : $x_{3}$ (= nontrvial variable)   \n",
+    "> * 즉, nontrvial variable이 존재하므로 set ${\\mathbf{v_{1}, v_{2}, v_{3}}}$은 linearly dependent하다. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1.7.1 Sets of One or Two Vectors\n",
+    "![ldlid](./linearly_dependent.png)\n",
+    "> * **위** : $\\mathbf{v_{1}} = \\begin{bmatrix} 3 \\\\ 1 \\end{bmatrix}$, $\\mathbf{v_{2}} = \\begin{bmatrix} 6 \\\\ 2\\end{bmatrix}$  \n",
+    "> $\\mathbf{v_{2}} = 2\\mathbf{v_{1}}$, 즉 scalar multiple로 만들어 낼 수 있다. --> linearly dependent  \n",
+    "> * **아래** : $\\mathbf{v_{1}} = \\begin{bmatrix} 3 \\\\ 2 \\end{bmatrix}$, $\\mathbf{v_{2}} = \\begin{bmatrix} 6 \\\\ 2\\end{bmatrix}$    \n",
+    "> scalar multiple로 만들어 낼 수 없다. --> linearly independent\n",
+    "\n",
+    "  \n",
+    "### 1.7.2 Sets of Two or More Vectors\n",
+    "### *Theorem 7* : Characterization of Linearly Dependent Sets \n",
+    "> set $S =${$\\mathbf{v_{1}}, \\dots, \\mathbf{v_{p}}$}의 둘 또는 그 이상의 벡터가 linearly dependent하다면 set $S$의 벡터로 다른 벡터를 linear combination으로 표현 가능하다. \n",
+    "\n",
+    "**EX) $\\mathbf{u} = \\begin{bmatrix} 3\\\\1\\\\0 \\end{bmatrix}$, $\\mathbf{v} = \\begin{bmatrix} 1\\\\6\\\\0 \\end{bmatrix}$가 주어졌다. {$\\mathbf{u, v, w}$}가 linearly dependent할 때, Span{$\\mathbf{u, v}$}에서 벡터 $\\mathbf{w}$가 dependent한지 independent한지 설명하라.**  \n",
+    "> **Sol)**  \n",
+    "> {$\\mathbf{u, v, w}$}가 linearly dependent하다는 것은 \n",
+    "    > * Span{$\\mathbf{u, v}$}와 Span{$\\mathbf{u, v, w}$}이 동일\n",
+    "    > * $\\mathbf{w}$가 $\\mathbf{u}$, $\\mathbf{v}$의 linear combination으로 형성 가능\n",
+    "    > * $\\mathbf{w}$가 Span{$\\mathbf{u, v}$}에 속해있다.  \n",
+    "> 는 뜻이다.  따라서 Span{$\\mathbf{u, v}$}에서 벡터 $\\mathbf{w}$가 dependent하다.\n",
+    "\n",
+    "\n",
+    "\n",
+    "> ![th7](./theorem7.png)\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 8*\n",
+    "> $p>n$일 때, set {$\\mathbf{v_{1}}, \\dots, \\mathbf{v_{p}}$} in $\\mathbb{R}^n$은 lineearly dependent하다.\n",
+    "\n",
+    "### *Theorem 9*\n",
+    "> set $S =${$\\mathbf{v_{1}}, \\dots, \\mathbf{v_{p}}$} in $\\mathbb{R}^n$이 zero vector를 포함하고 있다면 그 set은 linearly dependent하다."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "--------------------------------\n",
+    "## 1.8 Introduction to Linear Transformations\n",
+    "### 1.8.1 Linear Transformations\n",
+    "#### A transformation(or function or mapping) $T$ from  $\\mathbb{R}^n$ to  $\\mathbb{R}^m$ is a rule that assigns to each vector $\\mathbf{x}$ in  $\\mathbb{R}^n$ a vector $T(\\mathbf{x})$ in  $\\mathbb{R}^m$\n",
+    "* $T$ is m x n\n",
+    "* set $\\mathbb{R}^n$ : **domain** of $T$ ; 정의역\n",
+    "* set $\\mathbb{R}^m$ : **codomain** of $T$ ; 공역\n",
+    "* set of all images $T(\\mathbf{x})$ : **range** of $T$  \n",
+    "![lt](./linear_transformation.png)  \n",
+    "\n",
+    "### *Definition*\n",
+    "> A transformation(or mapping) $T$ is linear if:  \n",
+    "> 1. $T(\\mathbf{u + v}) = T(\\mathbf{u}) + T(\\mathbf{v})$ for all $\\mathbf{u, v}$ in the domain of $T$. ; additivity  \n",
+    "> 2. $T(c\\mathbf{u}) = cT(\\mathbf{u})$ for all scalars $c$ an all $\\mathbf{u}$ in the domain of $T$. ; homogeneity\n",
+    "    > * following useful facts\n",
+    "    > 3. $T(\\mathbf{0}) = \\mathbf{0}$  \n",
+    "    > 2에 의해 $T(\\mathbf{0}) = T(0\\mathbf{u}) = 0T(\\mathbf{u}) = \\mathbf{0}$\n",
+    "    > 4. $T(c\\mathbf{u} + d(\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$  \n",
+    "    > 1과 2에 의해 $T(c\\mathbf{u} + d(\\mathbf{v}) = T(c\\mathbf{u}) + T(d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$\n",
+    "    \n",
+    "* **superposition principle**  \n",
+    "$T(c_{1}\\mathbf{v_{1}} + \\dots + c_{p}\\mathbf{v_{p}}) = c_{1}T(\\mathbf{v_{1}}) + \\dots +  c_{p}T(\\mathbf{v_{p}})$  \n",
+    "The system satisfies the superposition principle if whenever an input is expressed as a linear combination of such signals, the system's response is the same linear combination of the responses to the individual signals.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "-----------------------\n",
+    "## 1.9 The Matrix of a Linear Transformation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 10*\n",
+    "> Let $T : \\mathbb{R}^n {\\rightarrow} \\mathbb{R}^m$ be a linear transformation. Then there **exists a unique matrix** $A$ such that  \n",
+    "$$T(\\mathbf{x}) = A\\mathbf{x}$$ for all $\\mathbf{x}$ in $\\mathbb{R}^n$  \n",
+    "In fact, $A$ is the $m * n$ matrix whose $j$th column is the vector $T(\\mathbf{e_{j}})$, where $\\mathbf{e_{j}}$ is the $j$th column of the identity matrix in $\\mathbb{R}^n$:  \n",
+    "$$A = \\begin{bmatrix} T(\\mathbf{e_{1}}) & \\dots & T(\\mathbf{e_{j}}) \\end{bmatrix}$$ (; $A$ = **standard matrix for the linear transformation $T$**)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Definition* : onto\n",
+    "> A mapping $T : \\mathbb{R}^n {\\rightarrow} \\mathbb{R}^m$ is said to be **onto** $\\mathbb{R}^m$ if each **b** in $\\mathbb{R}^m$ is the image of at least one $\\mathbf{x}$ in $\\mathbb{R}^n$  \n",
+    "![onto](./onto.png)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Definition* : one-to-one\n",
+    "> A mapping $T : \\mathbb{R}^n {\\rightarrow} \\mathbb{R}^m$ is said to be **one-to-one** if each **b** in $\\mathbb{R}^m$ is the image of at most one $\\mathbf{x}$ in $\\mathbb{R}^n$  \n",
+    "![oto](./one-to-one.png)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 11*\n",
+    "> Let $T : \\mathbb{R}^n {\\rightarrow} \\mathbb{R}^m$ be a linear transformation. Then $T$ is one-to-one if and only if the equation  $T(\\mathbf{x}) = \\mathbf{0}$ has **only trivial solution.**\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### *Theorem 12*\n",
+    "> Let $T : \\mathbb{R}^n {\\rightarrow} \\mathbb{R}^m$ be a linear transformation. and let $A$ be the standard matrix for $T$. then:  \n",
+    "a. $T$ maps $\\mathbb{R}^n$ onto $\\mathbb{R}^m$ if and only if the columns of $A$ span $\\mathbb{R}^m$  \n",
+    "b. $T$ is one-to-one if and only if the columns of $A$ are linearly independent."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
